@@ -1,5 +1,6 @@
-import { StyleSheet, Text, View } from "react-native";
-import React from "react";
+import { Platform, StyleSheet, Text, View } from "react-native";
+
+import BigButton from "./BigButton";
 
 type Props = {
   title: string;
@@ -8,7 +9,11 @@ type Props = {
 export const NavBar = ({ title }: Props) => {
   return (
     <View style={styles.navBar}>
-      <Text style={styles.text}>{title}</Text>
+      <Text style={styles.text}>
+        {title}
+        {Platform.OS}
+      </Text>
+      <BigButton />
       <Text style={styles.text}>Menu</Text>
     </View>
   );

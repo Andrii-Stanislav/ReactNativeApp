@@ -2,8 +2,8 @@ import { useState } from "react";
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, View, Alert } from "react-native";
 
-import { NavBar, TodoForm, TodoList } from "./src/components";
-import type { Todo } from "./src/types";
+import { NavBar, TodoForm, TodoList } from "./components";
+import type { Todo } from "./types";
 
 export default function App() {
   const [todos, setTodos] = useState<Todo[]>([]);
