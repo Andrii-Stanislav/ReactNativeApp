@@ -6,17 +6,24 @@ import { TodoItem } from "./TodoItem";
 
 type Props = {
   todos: Todo[];
-  onDeleteTodo: (id: string) => void;
+  onChangeTodoDone: (id: string) => void;
+  goToDetailPage: (todoId: string) => void;
 };
 
-export const TodoList = ({ todos, onDeleteTodo }: Props) => {
+export const TodoList = ({
+  todos,
+  onChangeTodoDone,
+  goToDetailPage,
+}: Props) => {
   return (
     <FlatList
       data={todos}
       renderItem={({ item }) => (
         <TodoItem
           text={item.text}
-          onLongPress={onDeleteTodo.bind(null, item.id)}
+          isDone={item.isDone}
+          onPress={goToDetailPage.bind(null, item.id)}
+          onLongPress={onChangeTodoDone.bind(null, item.id)}
         />
       )}
       keyExtractor={({ id }) => id}
