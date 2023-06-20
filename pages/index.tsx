@@ -18,6 +18,7 @@ export const Pages = () => (
     <Stack.Navigator>
       {ROUTES.map((page) => (
         <Stack.Screen
+          key={page.name}
           name={page.name}
           component={page.component}
           options={{

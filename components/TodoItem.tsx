@@ -1,33 +1,60 @@
-import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import { StyleSheet, Text, TouchableOpacity } from "react-native";
+import { ListItem, Button } from "@rneui/themed";
+import { FadeInView } from "./FadeInView";
 
 type Props = {
   text: string;
   isDone: boolean;
   onPress: () => void;
   onLongPress: () => void;
+  onDelete: () => void;
 };
 
-export const TodoItem = ({ text, isDone, onPress, onLongPress }: Props) => {
+export const TodoItem = ({
+  text,
+  isDone,
+  onPress,
+  onLongPress,
+  onDelete,
+}: Props) => {
   return (
-    <TouchableOpacity onPress={onPress} onLongPress={onLongPress}>
-      <View style={[styles.box, isDone && styles.isDone]}>
-        <Text style={styles.text}>{text}</Text>
-      </View>
-    </TouchableOpacity>
+    <FadeInView>
+      <ListItem.Swipeable
+        rightContent={() => (
+          <Button
+            title="Delete"
+            onPress={onDelete}
+            buttonStyle={{ minHeight: "100%", backgroundColor: "red" }}
+          />
+        )}
+      >
+        <ListItem.Content>
+          <TouchableOpacity onPress={onPress} onLongPress={onLongPress}>
+            <Text
+              style={[styles.text, isDone && styles.isDone]}
+              ellipsizeMode="tail"
+              numberOfLines={1}
+            >
+              {text}
+            </Text>
+          </TouchableOpacity>
+        </ListItem.Content>
+        <ListItem.Chevron />
+      </ListItem.Swipeable>
+    </FadeInView>
   );
 };
 
 const styles = StyleSheet.create({
   box: {
-    flexDirection: "row",
-    justifyContent: "space-between",
     backgroundColor: "#00ffc877",
     padding: 8,
   },
-  isDone: {
-    backgroundColor: "#00ffc82c",
-  },
+
   text: {
     color: "#000",
+  },
+  isDone: {
+    textDecorationLine: "line-through",
   },
 });

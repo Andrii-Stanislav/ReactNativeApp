@@ -7,12 +7,14 @@ import { TodoItem } from "./TodoItem";
 type Props = {
   todos: Todo[];
   onChangeTodoDone: (id: string) => void;
+  onDelete: (id: string) => void;
   goToDetailPage: (todoId: string) => void;
 };
 
 export const TodoList = ({
   todos,
   onChangeTodoDone,
+  onDelete,
   goToDetailPage,
 }: Props) => {
   return (
@@ -24,6 +26,7 @@ export const TodoList = ({
           isDone={item.isDone}
           onPress={goToDetailPage.bind(null, item.id)}
           onLongPress={onChangeTodoDone.bind(null, item.id)}
+          onDelete={onDelete.bind(null, item.id)}
         />
       )}
       keyExtractor={({ id }) => id}

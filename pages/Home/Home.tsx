@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { StatusBar } from "expo-status-bar";
 import { StyleSheet, View, Alert } from "react-native";
 
 import { NavBar, TodoForm, TodoList } from "../../components";
@@ -9,18 +8,18 @@ import type { HomeProps } from "../types.props";
 export default function Home({ navigation }: HomeProps) {
   const [todos, setTodos] = useState<Todo[]>([]);
 
-  const addTodo = (text: string) => {
+  const addTodo = ({ text, isDone }: { text: string; isDone: boolean }) => {
     if (text.length === 0) {
       Alert.alert("Todo text can't be empty");
       return;
     }
 
-    setTodos((prev) => [{ id: `${Date.now()}`, text, isDone: false }, ...prev]);
+    setTodos((prev) => [{ id: `${Date.now()}`, text, isDone }, ...prev]);
   };
 
-  // const onDeleteTodo = (id: string) => {
-  //   setTodos((prev) => prev.filter((todo) => todo.id !== id));
-  // };
+  const onDeleteTodo = (id: string) => {
+    setTodos((prev) => prev.filter((todo) => todo.id !== id));
+  };
 
   const onChangeTodoDone = (id: string) => {
     setTodos((prev) =>
@@ -41,10 +40,9 @@ export default function Home({ navigation }: HomeProps) {
       <TodoList
         todos={todos}
         onChangeTodoDone={onChangeTodoDone}
+        onDelete={onDeleteTodo}
         goToDetailPage={goToDetailPage}
       />
-
-      <StatusBar style="auto" />
     </View>
   );
 }

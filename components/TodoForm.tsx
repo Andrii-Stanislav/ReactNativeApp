@@ -1,16 +1,19 @@
 import { useState } from "react";
 
-import { StyleSheet, View, TextInput, Button } from "react-native";
+import { StyleSheet, View, TextInput, Switch, Button } from "react-native";
 
 type Props = {
-  addTodo: (newTOdo: string) => void;
+  addTodo: (args: { text: string; isDone: boolean }) => void;
 };
 
 export const TodoForm = ({ addTodo }: Props) => {
   const [text, setText] = useState("");
+  const [isDone, setIsDone] = useState(false);
+  const toggleSwitch = () => setIsDone((prev) => !prev);
 
   const addHandler = () => {
-    addTodo(text.trim());
+    addTodo({ text: text.trim(), isDone });
+    setIsDone(false);
     setText("");
   };
 
@@ -23,7 +26,9 @@ export const TodoForm = ({ addTodo }: Props) => {
         autoCorrect={false}
         autoCapitalize="none"
         style={styles.input}
+        returnKeyType="done"
       />
+      <Switch onValueChange={toggleSwitch} value={isDone} />
       <View style={styles.button}>
         <Button title="Add" onPress={addHandler} color="#00ffc8" />
       </View>
@@ -36,15 +41,16 @@ const styles = StyleSheet.create({
     padding: 16,
     flexDirection: "row",
     justifyContent: "space-between",
+    alignItems: "center",
     gap: 8,
   },
   input: {
     borderColor: "#00ffc8",
     borderWidth: 1,
-    width: "70%",
+    width: "60%",
     paddingHorizontal: 8,
   },
   button: {
-    width: "30%",
+    width: "20%",
   },
 });
