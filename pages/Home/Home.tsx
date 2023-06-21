@@ -1,32 +1,35 @@
-import { useState } from "react";
 import { StyleSheet, View, Alert } from "react-native";
 
 import { NavBar, TodoForm, TodoList } from "../../components";
 import type { Todo } from "../../types";
 import type { HomeProps } from "../types.props";
+import {
+  todosActions,
+  getTodosList,
+  useAppDispatch,
+  useAppSelector,
+} from "../../store";
 
 export default function Home({ navigation }: HomeProps) {
-  const [todos, setTodos] = useState<Todo[]>([]);
+  const dispatch = useAppDispatch();
 
-  const addTodo = ({ text, isDone }: { text: string; isDone: boolean }) => {
-    if (text.length === 0) {
+  const todos = useAppSelector(getTodosList);
+
+  const addTodo = (params: Pick<Todo, "text" | "isDone">) => {
+    if (params.text.length === 0) {
       Alert.alert("Todo text can't be empty");
       return;
     }
 
-    setTodos((prev) => [{ id: `${Date.now()}`, text, isDone }, ...prev]);
+    dispatch(todosActions.addTodo(params));
   };
 
   const onDeleteTodo = (id: string) => {
-    setTodos((prev) => prev.filter((todo) => todo.id !== id));
+    dispatch(todosActions.deleteTodo(id));
   };
 
   const onChangeTodoDone = (id: string) => {
-    setTodos((prev) =>
-      prev.map((todo) =>
-        todo.id === id ? { ...todo, isDone: !todo.isDone } : todo
-      )
-    );
+    dispatch(todosActions.changeTodoDone(id));
   };
 
   const goToDetailPage = (todoId: string) => {
