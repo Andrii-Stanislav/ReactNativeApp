@@ -1,6 +1,7 @@
 import { useState } from "react";
 
-import { StyleSheet, View, TextInput, Switch, Button } from "react-native";
+import { StyleSheet, View } from "react-native";
+import { Input, Button, Switch } from "@rneui/themed";
 
 type Props = {
   addTodo: (args: { text: string; isDone: boolean }) => void;
@@ -19,15 +20,16 @@ export const TodoForm = ({ addTodo }: Props) => {
 
   return (
     <View style={styles.box}>
-      <TextInput
-        value={text}
-        onChangeText={setText}
-        placeholder="Enter todo text"
-        autoCorrect={false}
-        autoCapitalize="none"
-        style={styles.input}
-        returnKeyType="done"
-      />
+      <View style={styles.input}>
+        <Input
+          value={text}
+          onChangeText={setText}
+          placeholder="Enter todo text"
+          autoCorrect={false}
+          autoCapitalize="none"
+          returnKeyType="done"
+        />
+      </View>
       <Switch onValueChange={toggleSwitch} value={isDone} />
       <View style={styles.button}>
         <Button title="Add" onPress={addHandler} color="#00ffc8" />
@@ -45,8 +47,6 @@ const styles = StyleSheet.create({
     gap: 8,
   },
   input: {
-    borderColor: "#00ffc8",
-    borderWidth: 1,
     width: "60%",
     paddingHorizontal: 8,
   },

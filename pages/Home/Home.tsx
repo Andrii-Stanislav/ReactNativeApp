@@ -38,7 +38,6 @@ export default function Home({ navigation }: HomeProps) {
 
   return (
     <View style={styles.container}>
-      <NavBar title="Todo APP" />
       <TodoForm addTodo={addTodo} />
       <TodoList
         todos={todos}
@@ -46,6 +45,7 @@ export default function Home({ navigation }: HomeProps) {
         onDelete={onDeleteTodo}
         goToDetailPage={goToDetailPage}
       />
+      <NavBar />
     </View>
   );
 }

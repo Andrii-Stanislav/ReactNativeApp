@@ -5,9 +5,11 @@ import { persistReducer } from "redux-persist";
 
 import { persistConfig, PERSIST_MIDDLEWARE_OPTIONS } from "./persistConfig";
 
+import userReducer from "./slices/user";
 import todosReducer from "./slices/todos";
 
 const rootReducers = combineReducers({
+  user: userReducer,
   todos: todosReducer,
 });
 

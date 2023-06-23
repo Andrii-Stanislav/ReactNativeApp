@@ -1,12 +1,7 @@
-import { StyleSheet, Text, View } from "react-native";
-import React from "react";
+import { StyleSheet, Text } from "react-native";
 
 export default function BigButton() {
-  return (
-    <View>
-      <Text>BigButton</Text>
-    </View>
-  );
+  return <Text>web</Text>;
 }
 
 const styles = StyleSheet.create({});

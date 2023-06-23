@@ -1,6 +1,7 @@
 import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome5";
 
+import { NavBar } from "../../components";
 import type { TodoDetailProps } from "../types.props";
 import {
   todosActions,
@@ -45,6 +46,7 @@ export default function TodoDetail({ route }: TodoDetailProps) {
           <Text>Delete</Text>
         </TouchableOpacity>
       </View>
+      <NavBar />
     </View>
   );
 }

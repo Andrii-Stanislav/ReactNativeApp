@@ -1,8 +1,7 @@
-import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text } from "react-native";
 
 export default function BigButton() {
-  return <Text>BigButton.android</Text>;
+  return <Text>android</Text>;
 }
 
 const styles = StyleSheet.create({});
